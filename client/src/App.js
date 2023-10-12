@@ -9,6 +9,7 @@ import plantLogo from './images/plantLogo.png';
 import { Line as LineChart } from 'react-chartjs-2';
 // MDB React UI Graph
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBLine } from 'mdb-react-ui-kit';
+import SensorGraphs from './components/SensorGraphs';
 
 
 const theme = createTheme({
@@ -86,6 +87,11 @@ function App() {
           </Grid>
           
           {/* sensor data graphs */}
+
+          <Grid item xs={12} sm={6}>
+            <SensorGraphs sensorData={sensorData} />
+          </Grid>
+          
           <Grid item xs={12} sm={6}>
             <Card>
               <CardContent>
