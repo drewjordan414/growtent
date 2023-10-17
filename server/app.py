@@ -8,6 +8,11 @@ import adafruit_sht4x
 import adafruit_tsl2591
 from flask_cors import CORS
 import time 
+# database
+import mysql.connector
+from mysql.connector import Error
+from mysql.connector import errorcode
+import datetime
 
 # Initialize I2C sensors 
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -17,6 +22,12 @@ tsl = adafruit_tsl2591.TSL2591(i2c)
 
 app = Flask(__name__)
 CORS(app)  # Handling CORS for local development
+
+# database connection
+# db = mysql.connector.connect()
+# cursor = db.cursor()
+# cursor.execute("SELECT VERSION()")
+# data = cursor.fetchone()
 
 def read_temp():
     """Read the temperature in Fahrenheit from the SHT40."""
