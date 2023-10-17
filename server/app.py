@@ -50,31 +50,6 @@ def sensor_data():
     #send the data to graphs 
     return jsonify(data)
 
-# def gen():
-#     """Generate the video stream."""
-#     cap = cv2.VideoCapture(0)
-#     # setup the camera and the video feed 
-#     cap = cv2.VideoCapture(0)
-#     while True:
-#         cap.set(cv2.CAP_PROP_FPS, 30)
-#         ret, frame = cap.read()
-#         if not ret:
-#             print("Can't receive frame (stream end?). Exiting ...")
-#             break 
-
-    # while True:
-    #     # set the frame rate to 30fps 
-    #     cap.set(cv2.CAP_PROP_FPS, 30)
-    #     ret, frame = cap.read()
-    #     if not ret:
-    #         print("Can't receive frame (stream end?). Exiting ...")
-    #         break
-        
-    #     # Convert the frame to JPEG and return
-    #     ret, jpeg = cv2.imencode('.jpg', frame)
-    #     yield (b'--frame\r\n'
-    #            b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n\r\n')
-
 
 
 def gen():
@@ -101,6 +76,38 @@ def gen():
 
         # Use a fixed time delay to attempt a more consistent frame rate
         time.sleep(0.0333)
+
+# @app.route('/soil')
+# def soil():
+#     """Provide soil data as a JSON response."""
+#     data = {
+#         "soil": read_soil(),
+#     }
+#     return jsonify(data)
+
+# @app.route('/api/temp')
+# def temp():
+#     """Provide temperature data as a JSON response."""
+#     data = {
+#         "temperature": read_temp(),
+#     }
+#     return jsonify(data)
+
+# @app.route('/api/humidity')
+# def humidity():
+#     """Provide humidity data as a JSON response."""
+#     data = {
+#         "humidity": read_humidity(),
+#     }
+#     return jsonify(data)
+
+# @app.route('/api/light')
+# def light():
+#     """Provide light data as a JSON response."""
+#     data = {
+#         "light": read_light(),
+#     }
+#     return jsonify(data)
 
 @app.route('/api/video_feed')
 def video_feed():
