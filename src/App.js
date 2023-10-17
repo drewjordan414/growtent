@@ -139,8 +139,9 @@ function App() {
           </Grid>
         </Grid>
 
-        {/* graphs */}
-        <SensorGraphs sensorData={sensorData} />
+        {/* graphs from SensorGraph component*/}
+       {/* <SensorGraphs sensorData={sensorData} /> */}
+        {/* causes issues */}
 
         <Box style={{ position: 'fixed', right: '1rem', bottom: '1rem' }}>
           <Typography variant="body2">Built with React by Drew</Typography>
