@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Container, AppBar, Toolbar, Typography, Grid, CssBaseline, Card, CardContent, Box } from '@material-ui/core';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { Container, AppBar, Toolbar, Typography, Grid, CssBaseline, Card, CardContent, Box } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import LiveVideo from './components/video';
 import SensorData from './components/sensor';
 import plantLogo from './images/plantLogo.png';
-// import chart.js
-import { Line as LineChart } from 'react-chartjs-2';
-// MDB React UI Graph
-import { MDBCard, MDBCardBody, MDBCardTitle, MDBLine } from 'mdb-react-ui-kit';
-import SensorGraphs from './components/SensorGraphs';
 
 
 const theme = createTheme({
@@ -85,18 +80,12 @@ function App() {
               </Card>
             ))}
           </Grid>
-          
-          {/* sensor data graphs */}
 
-          <Grid item xs={12} sm={6}>
-            <SensorGraphs sensorData={sensorData} />
-          </Grid>
-          
           <Grid item xs={12} sm={6}>
             <Card>
               <CardContent>
                 <Typography variant="h6">Temperature (°F)</Typography>
-                <LineChart width={400} height={150} data={sensorData.temperature}>
+                <LineChart width={400} height={150} data={sensorData}>
                   <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                   <XAxis dataKey="name" />
                   <YAxis />
@@ -106,10 +95,12 @@ function App() {
               </CardContent>
             </Card>
 
+
+            {/* take in the json data from the sensors graph */}
             <Card style={{ marginTop: '15px' }}>
               <CardContent>
                 <Typography variant="h6">Humidity (%)</Typography>
-                <LineChart width={400} height={150} data={sensorData.humidity}>
+                <LineChart width={400} height={150} data={sensorData}>
                   <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                   <XAxis dataKey="name" />
                   <YAxis />
@@ -122,7 +113,7 @@ function App() {
             <Card style={{ marginTop: '15px' }}>
               <CardContent>
                 <Typography variant="h6">Soil Moisture (%)</Typography>
-                <LineChart width={400} height={150} data={sensorData.soil}>
+                <LineChart width={400} height={150} data={sensorData}>
                   <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                   <XAxis dataKey="name" />
                   <YAxis />
@@ -135,7 +126,7 @@ function App() {
             <Card style={{ marginTop: '15px' }}>
               <CardContent>
                 <Typography variant="h6">Light (lux)</Typography>
-                <LineChart width={400} height={150} data={sensorData.light}>
+                <LineChart width={400} height={150} data={sensorData}>
                   <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                   <XAxis dataKey="name" />
                   <YAxis />
