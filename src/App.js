@@ -5,6 +5,7 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts'
 import LiveVideo from './components/video';
 import SensorData from './components/sensor';
 import plantLogo from './images/plantLogo.png';
+import SensorGraphs from './components/SensorGraph';
 
 
 const theme = createTheme({
@@ -137,6 +138,9 @@ function App() {
             </Card>
           </Grid>
         </Grid>
+
+        {/* graphs */}
+        <SensorGraphs sensorData={sensorData} />
 
         <Box style={{ position: 'fixed', right: '1rem', bottom: '1rem' }}>
           <Typography variant="body2">Built with React by Drew</Typography>
