@@ -30,6 +30,7 @@ backcall==0.2.0
 bcrypt==4.0.1
 beautifulsoup4==4.9.3
 bitstring==4.0.1
+blinker==1.6.3
 board==1.0
 bs4==0.0.1
 btlejack==2.1.1
@@ -67,8 +68,9 @@ executing==1.2.0
 fastapi==0.95.0
 ffmpy==0.3.0
 filelock==3.12.4
-Flask==2.2.3
+Flask==3.0.0
 Flask-Cors==4.0.0
+Flask-SQLAlchemy==3.1.1
 flatbuffers==23.3.3
 flax==0.6.7
 fonttools==4.38.0
@@ -86,6 +88,7 @@ google-pasta==0.2.0
 googleapis-common-protos==1.59.0
 gradio==3.23.0
 graphics.py==5.0.1.post1
+greenlet==3.0.0
 grpcio==1.53.0
 grpcio-status==1.53.0
 gTTS==2.3.1
@@ -387,6 +390,7 @@ sortedcontainers==2.4.0
 soupsieve==2.3.2.post1
 SpeechRecognition==3.10.0
 spinners==0.0.24
+SQLAlchemy==2.0.22
 sqlparse==0.4.3
 stack-data==0.6.2
 starlette==0.26.1
@@ -424,7 +428,7 @@ uvicorn==0.21.1
 virtualenv==20.24.5
 wcwidth==0.2.5
 websockets==10.4
-Werkzeug==2.2.3
+Werkzeug==3.0.0
 wrapt==1.14.1
 wsproto==1.2.0
 yarl==1.8.2
