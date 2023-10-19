@@ -6,7 +6,6 @@ FLUSH PRIVILEGES;
 -- db table schema
 CREATE DATABASE sensor_data;
 USE sensor_data;
-SELECT DATABASE(sensor_data);
 CREATE TABLE sensors (
   id INT NOT NULL AUTO_INCREMENT,
   sensor_id INT NOT NULL,
