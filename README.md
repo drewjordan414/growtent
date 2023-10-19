@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# GardenPi 🌱
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Monitor your plant's health with live video analytics and various sensor readings such as temperature, humidity, soil moisture, and light. This system combines a frontend built with React to display the data and a backend Flask server to handle sensor readings and video stream processing.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Live Video Stream**: View a live feed of your plants with real-time analytics overlaying the video.
+- **Sensor Data**: Real-time readings from various sensors:
+  - Temperature (in Fahrenheit)
+  - Humidity (in percentage)
+  - Soil Moisture
+  - Light (in lux)
+  
+- **Predictive Analysis**: Utilizing TensorFlow and TensorFlow Hub, the system can predict nutrient deficiencies from the live video feed.
+  - This is still a work in progress
+    
+## Prerequisites
 
-### `npm start`
+- Python 3.8+
+- Node.js and npm
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Backend Setup
 
-### `npm test`
+1. **Clone the Repository**:
+    ```
+    git clone https://github.com/drewjordan414/growtent.git
+    cd growtent
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Set Up a Virtual Environment**:
+    ```
+    python -m venv venv
+    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    ```
 
-### `npm run build`
+3. **Install Dependencies**:
+    ```
+    pip install -r requirements.txt
+    ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. **Run the Flask App**:
+    ```
+    python app.py
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Frontend Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Navigate to the React app directory:
+    ```
+    cd path-to-react-app
+    ```
 
-### `npm run eject`
+2. Install the required npm packages:
+    ```
+    npm install
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Start the React app:
+    ```
+    npm start
+    ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Visit `http://localhost:3000` in your browser to access the web application.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Technologies Used
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Backend**:
+  - Flask
+  - TensorFlow and TensorFlow Hub
+  - OpenCV
+  - Adafruit libraries for sensor integration
 
-## Learn More
+- **Frontend**:
+  - React
+  - Material-UI
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contributions
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
-### Code Splitting
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[MIT License](LICENSE)
