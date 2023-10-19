@@ -5,7 +5,7 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts'
 import LiveVideo from './components/video';
 import SensorData from './components/sensor';
 import plantLogo from './images/plantLogo.png';
-import SensorGraphs from './components/SensorGraph';
+
 
 
 const theme = createTheme({

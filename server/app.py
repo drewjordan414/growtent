@@ -1,18 +1,22 @@
 # housekeeping, import 
 from flask import Flask, Response, jsonify
+# video streaming
 import cv2
+# sensors
 import board
 import busio 
 import adafruit_seesaw
 import adafruit_sht4x
 import adafruit_tsl2591
+# proxy 
 from flask_cors import CORS
 import time 
 # database
+from flask_sqlalchemy import SQLAlchemy
 import mysql.connector
-from mysql.connector import Error
-from mysql.connector import errorcode
 import datetime
+import os
+import dotenv
 
 # Initialize I2C sensors 
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -20,14 +24,27 @@ ss = adafruit_seesaw.Seesaw(i2c)
 sht = adafruit_sht4x.SHT4x(i2c)
 tsl = adafruit_tsl2591.TSL2591(i2c)
 
-app = Flask(__name__)
-CORS(app)  # Handling CORS for local development
+# initialize db settings
+db_name = os.getenv("DB_NAME")
+db_user = os.getenv("DB_USER")
+db_password = os.getenv("DB_PASSWORD")
+db_host = os.getenv("DB_HOST")
 
+app = Flask(__name__)
 # database connection
-# db = mysql.connector.connect()
-# cursor = db.cursor()
-# cursor.execute("SELECT VERSION()")
-# data = cursor.fetchone()
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{db_user}:{db_password}@{db_host}/{db_name}'
+db = SQLAlchemy(app)
+# CORS handling
+CORS(app)  
+
+# snesor ids
+SENSOR_IDS = {
+    "temperature": 1,
+    "humidity": 2,
+    "soil": 3,
+    "light": 4
+}
+
 
 def read_temp():
     """Read the temperature in Fahrenheit from the SHT40."""
@@ -40,6 +57,7 @@ def read_humidity():
     humidity =  sht.relative_humidity
     return round(humidity, 2)
 
+
 def read_soil():
     """Read the soil moisture from the soil sensor."""
     return ss.moisture_read()
@@ -48,6 +66,27 @@ def read_light():
     """Read the light sensor value."""
     light = tsl.lux
     return round(light, 2)
+
+# Define the SQLAlchemy model for the sensors table
+class SensorReading(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sensor_id = db.Column(db.Integer, nullable=False)
+    value = db.Column(db.Float, nullable=False)  # Storing the actual sensor value
+    time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+# @app.route('/api/sensor_data')
+# def sensor_data():
+#     """Provide sensor data as a JSON response."""
+#     data = {
+#         "temperature": read_temp(),
+#         "humidity": read_humidity(),
+#         "soil": read_soil(),
+#         "light": read_light()
+#     }
+#     #send the data to graphs 
+#     return jsonify(data)
+                        # this is old code that was used to send data wihout database
+
 
 @app.route('/api/sensor_data')
 def sensor_data():
@@ -58,7 +97,17 @@ def sensor_data():
         "soil": read_soil(),
         "light": read_light()
     }
-    #send the data to graphs 
+    
+    # Store the data in the database
+    for sensor_type, value in data.items():
+        reading = SensorReading(
+            sensor_id=SENSOR_IDS[sensor_type],
+            value=value
+        )
+        db.session.add(reading)
+    
+    db.session.commit()
+
     return jsonify(data)
 
 
@@ -87,38 +136,6 @@ def gen():
 
         # Use a fixed time delay to attempt a more consistent frame rate
         time.sleep(0.0333)
-
-# @app.route('/soil')
-# def soil():
-#     """Provide soil data as a JSON response."""
-#     data = {
-#         "soil": read_soil(),
-#     }
-#     return jsonify(data)
-
-# @app.route('/api/temp')
-# def temp():
-#     """Provide temperature data as a JSON response."""
-#     data = {
-#         "temperature": read_temp(),
-#     }
-#     return jsonify(data)
-
-# @app.route('/api/humidity')
-# def humidity():
-#     """Provide humidity data as a JSON response."""
-#     data = {
-#         "humidity": read_humidity(),
-#     }
-#     return jsonify(data)
-
-# @app.route('/api/light')
-# def light():
-#     """Provide light data as a JSON response."""
-#     data = {
-#         "light": read_light(),
-#     }
-#     return jsonify(data)
 
 @app.route('/api/video_feed')
 def video_feed():
